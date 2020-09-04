@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mysql-docker:
+    container_name: mysql-docker
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=adel21212121
+      - MYSQL_DATABASE=sikkens_DB
+      - MYSQL_PASSWORD=adel21212121
+    volumes:
+      - skaalab-data:/var/lib/mysql # on crie un volume skaalab-data ou cas ou on stock la base de donees en cas de perte de process
+
+
+  spring-boot-jpa-app:
+    image: spring-boot-jpa-image
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-docker:3306/sikkens_DB?autoReconnect=true&useSSL=false
+    depends_on:
+      - mysql-docker
+    ports:
+      - 9595:9595
+    volumes:
+      - /data/spring-boot-app
+
+volumes:
+    skaalab-data: {}
