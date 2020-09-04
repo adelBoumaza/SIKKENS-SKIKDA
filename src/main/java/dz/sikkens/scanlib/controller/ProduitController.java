@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/")
@@ -22,8 +23,8 @@ public class ProduitController {
 	}
 
 	@GetMapping("produit/{reference}")
-	public List<Produit> findByReference(@PathVariable("reference") String reference) {
-		return produitService.findAll();
+	public Optional<Produit> findByReference(@PathVariable("reference") String reference) {
+		return produitService.findProduitByReference(reference);
 	}
 
 	@PostMapping("produit/saveOrUpdate")

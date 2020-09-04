@@ -27,7 +27,7 @@ public class ProduitServiceImpl implements ProduitService{
 	public Produit saveOrUpdate(@NotNull ProduitDto produitDto) {
 		Optional<Produit> produitExist = produitDAO.findProduitByreference(produitDto.getReference());
 		if(produitExist.isPresent()) {
-			produitExist.get().setQuantite(produitDto.getQuantite());
+			produitExist.get().setQuantite(produitDto.getQuantite() - 1);
 			return produitDAO.save(produitExist.get());
 		}
 		Produit pr = modelMapper.map(produitDto, Produit.class);
