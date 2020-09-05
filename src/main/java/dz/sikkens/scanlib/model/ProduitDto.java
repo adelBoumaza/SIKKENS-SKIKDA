@@ -14,4 +14,5 @@ public class ProduitDto {
 	private LocalDate localDate;
 	private Integer quantite;
 	private BigDecimal prix;
+	private boolean isNotAddition;
 }
